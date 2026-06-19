@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Survei Lapangan Biznet - Jambi</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --line:#d9e0ea;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --primary:#0f62fe;
+      --primary-dark:#0b4fd1;
+      --success:#16a34a;
+      --warning:#d97706;
+      --danger:#dc2626;
+      --purple:#7c3aed;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.35;
+    }
+    .container{
+      max-width:1200px;
+      margin:20px auto 40px;
+      padding:0 16px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:18px;
+      margin-bottom:18px;
+      box-shadow:0 2px 8px rgba(0,0,0,.04);
+    }
+    h1,h2,h3{margin:0 0 10px}
+    h1{font-size:26px}
+    h2{font-size:20px;border-bottom:1px solid var(--line);padding-bottom:8px}
+    h3{font-size:16px;color:var(--primary)}
+    p, li{font-size:14px}
+    .muted{color:var(--muted)}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:12px;
+    }
+    .col-12{grid-column:span 12}
+    .col-8{grid-column:span 8}
+    .col-6{grid-column:span 6}
+    .col-4{grid-column:span 4}
+    .col-3{grid-column:span 3}
+    .col-2{grid-column:span 2}
+    @media (max-width:900px){
+      .col-8,.col-6,.col-4,.col-3,.col-2{grid-column:span 12}
+    }
+    label{
+      display:block;
+      font-size:13px;
+      font-weight:bold;
+      margin-bottom:6px;
+    }
+    input[type="text"], input[type="number"], input[type="tel"], select, textarea{
+      width:100%;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      font-size:14px;
+      background:#fff;
+    }
+    textarea{min-height:84px;resize:vertical}
+    .options{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 18px;
+      padding:8px 0 2px;
+    }
+    .options label{
+      font-weight:normal;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      margin:0;
+      font-size:14px;
+    }
+    .section-note{
+      background:#eff6ff;
+      border:1px solid #bfdbfe;
+      color:#1e3a8a;
+      padding:10px 12px;
+      border-radius:10px;
+      font-size:13px;
+      margin-bottom:12px;
+    }
+    .btns{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    button{
+      border:none;
+      background:var(--primary);
+      color:#fff;
+      padding:11px 16px;
+      border-radius:10px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+    button:hover{background:var(--primary-dark)}
+    .btn-secondary{background:#475569}
+    .btn-success{background:var(--success)}
+    .btn-warning{background:var(--warning)}
+    .btn-danger{background:var(--danger)}
+    .btn-purple{background:var(--purple)}
+    .scorebox{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+    .scoreitem{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:14px;
+      background:#fafcff;
+    }
+    .scoreitem .num{
+      font-size:28px;
+      font-weight:bold;
+      margin-top:8px;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:13px;
+      background:#fff;
+    }
+    th, td{
+      border:1px solid var(--line);
+      padding:8px;
+      text-align:left;
+      vertical-align:top;
+    }
+    th{
+      background:#eef2ff;
+      position:sticky;
+      top:0;
+      z-index:1;
+    }
+    .tag{
+      display:inline-block;
+      padding:4px 8px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:bold;
+      color:#fff;
+    }
+    .low{background:#dc2626}
+    .mid{background:#d97706}
+    .high{background:#16a34a}
+    .seg1{background:#16a34a}
+    .seg2{background:#d97706}
+    .seg3{background:#7c3aed}
+    .seg4{background:#6b7280}
+    .small{font-size:12px}
+    .checklist li{margin-bottom:6px}
+    .print-only{display:none}
+    @media print{
+      body{background:#fff}
+      .no-print{display:none !important}
+      .print-only{display:block}
+      .card{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid}
+      button{display:none}
+      .container{max-width:100%;margin:0;padding:0}
+      input, select, textarea{border:1px solid #999}
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="card">
+    <h1>Form Survei Lapangan Biznet - Branch Jambi</h1>
+    <p class="muted">Coverage: Kenali Asam, Kenali Asam Bawah, Talang Gulo, Bagan Pete</p>
+  </div>
+
+  <div class="card">
+    <h2>1) Apa yang harus dilakukan untuk segmen “yang penting jalan dan murah”?</h2>
+    <div class="section-note">
+      Ini adalah segmen yang kemungkinan besar tidak membeli karena butuh internet premium, tetapi karena butuh internet yang cukup berfungsi dengan biaya serendah mungkin.
+    </div>
+    <ul class="checklist">
+      <li><b>Jangan jual “100 Mbps” dulu.</b> Jual <b>manfaat praktis</b>: internet lancar untuk HP, anak sekolah, YouTube, WA, dan dipakai bareng keluarga.</li>
+      <li><b>Ubah bahasa sales dari speed ke outcome.</b> Contoh: “yang penting tidak rebutan”, “tetap jalan malam hari”, “lebih stabil untuk sekeluarga”.</li>
+      <li><b>Segmentasikan, jangan dipaksa semua closing.</b> Kalau responden sangat fokus murah dan budget di bawah Rp150–199 ribu, tandai sebagai <b>Promo Dependent / Low Priority</b>.</li>
+      <li><b>Masuk lewat pain point kompetitor.</b> Kalau provider murah mereka sering putus/lemot, pakai angle: <b>“lebih stabil, tidak bikin emosi, bisa dipakai rame-rame.”</b></li>
+      <li><b>Kurangi barrier awal.</b> Yang paling efektif biasanya:
+        <ul>
+          <li>gratis instalasi</li>
+          <li>diskon bulan awal</li>
+          <li>promo cluster tetangga</li>
+          <li>referral tetangga</li>
+        </ul>
+      </li>
+      <li><b>Gunakan social proof lokal.</b> Di perumahan subsidi/majemuk, orang cenderung ikut tetangga. Cari 3–5 rumah anchor dulu.</li>
+      <li><b>Jangan debat soal murah.</b> Jika konsumen bilang “yang penting jalan dan murah”, jawab:
+        <br><i>“Betul Pak/Bu, yang paling penting memang internetnya kepakai terus. Kalau boleh tahu, selama ini yang bikin kurang nyaman apa? Lemot, putus, atau rebutan di rumah?”</i>
+      </li>
+      <li><b>Tujuan riset:</b> bukan memaksa semua orang suka Biznet, tapi memisahkan:
+        <ul>
+          <li>yang bisa di-convert sekarang,</li>
+          <li>yang butuh promo,</li>
+          <li>yang belum layak diprioritaskan.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card no-print">
+    <h2>2) Petunjuk Penggunaan</h2>
+    <ul class="checklist">
+      <li>Isi form 1 responden lalu klik <b>Simpan Responden</b>.</li>
+      <li>Skor <b>Demand, Awareness, Acceptance</b> dihitung otomatis.</li>
+      <li>Data tersimpan di browser perangkat ini.</li>
+      <li>Bisa <b>Export CSV</b> untuk dibuka di Excel/Google Sheets.</li>
+      <li>Gunakan tombol <b>Print Form Kosong</b> bila ingin versi kertas.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>3) Form Survei Siap Print / Input Digital</h2>
+
+    <div class="print-only">
+      <p><b>Petunjuk singkat:</b> Mohon isi jawaban responden dengan jelas. Form ini digunakan untuk mengukur demand, brand awareness, dan brand acceptance Biznet di area survei.</p>
+    </div>
+
+    <form id="surveyForm">
+      <h3>A. Profil Responden</h3>
+      <div class="grid">
+        <div class="col-3">
+          <label>Tanggal</label>
+          <input type="text" id="tanggal" placeholder="dd/mm/yyyy">
+        </div>
+        <div class="col-3">
+          <label>Nama Inisial</label>
+          <input type="text" id="inisial">
+        </div>
+        <div class="col-3">
+          <label>Kelurahan</label>
+          <select id="kelurahan">
+            <option value="">Pilih</option>
+            <option>Kenali Asam</option>
+            <option>Kenali Asam Bawah</option>
+            <option>Talang Gulo</option>
+            <option>Bagan Pete</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label>RT/RW / Perumahan</label>
+          <input type="text" id="rt_rw">
+        </div>
+
+        <div class="col-3">
+          <label>Usia</label>
+          <input type="number" id="usia" min="17" max="100">
+        </div>
+        <div class="col-3">
+          <label>Pekerjaan</label>
+          <input type="text" id="pekerjaan">
+        </div>
+        <div class="col-3">
+          <label>Pendapatan Rumah Tangga/Bulan</label>
+          <select id="income">
+            <option value="">Pilih</option>
+            <option>&lt; Rp2 juta</option>
+            <option>Rp2–3 juta</option>
+            <option>Rp3–3,8 juta</option>
+            <option>&gt; Rp3,8 juta</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label>Status Rumah</label>
+          <select id="status_rumah">
+            <option value="">Pilih</option>
+            <option>Milik sendiri</option>
+            <option>Kontrak/sewa</option>
+            <option>Rumah keluarga</option>
+          </select>
+        </div>
+      </div>
+
+      <h3 style="margin-top:18px;">B. Kondisi Internet Saat Ini</h3>
+      <div class="grid">
+        <div class="col-12">
+          <label>8. Apakah saat ini menggunakan internet rumah/WiFi?</label>
+          <div class="options">
+            <label><input type="radio" name="wifi" value="Ya"> Ya</label>
+            <label><input type="radio" name="wifi" value="Tidak"> Tidak</label>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <label>9. Provider saat ini</label>
+          <select id="provider">
+            <option value="">Pilih</option>
+            <option>IndiHome</option>
+            <option>Biznet</option>
+            <option>MyRepublic</option>
+            <option>Iconnet</option>
+            <option>Provider lokal</option>
+            <option>Lainnya</option>
+            <option>Tidak ada</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label>10. Biaya internet/bulan</label>
+          <select id="biaya">
+            <option value="">Pilih</option>
+            <option>&lt; Rp150 ribu</option>
+            <option>Rp150–199 ribu</option>
+            <option>Rp200–249 ribu</option>
+            <option>Rp250–300 ribu</option>
+            <option>&gt; Rp300 ribu</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label>12. Jumlah pengguna rutin di rumah</label>
+          <select id="pengguna_rumah">
+            <option value="">Pilih</option>
+            <option>1–2 orang</option>
+            <option>3–4 orang</option>
+            <option>5 orang atau lebih</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <label>11. Penggunaan internet paling sering</label>
+          <div class="options">
+            <label><input type="checkbox" name="penggunaan" value="WhatsApp/social media"> WhatsApp/social media</label>
+            <label><input type="checkbox" name="penggunaan" value="Sekolah anak"> Sekolah anak</label>
+            <label><input type="checkbox" name="penggunaan" value="Kerja/WFH"> Kerja/WFH</label>
+            <label><input type="checkbox" name="penggunaan" value="Streaming YouTube/film"> Streaming YouTube/film</label>
+            <label><input type="checkbox" name="penggunaan" value="Gaming"> Gaming</label>
+            <label><input type="checkbox" name="penggunaan" value="Usaha/CCTV"> Usaha/CCTV</label>
+            <label><input type="checkbox" name="penggunaan" value="Lainnya"> Lainnya</label>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <label>13. Kepuasan terhadap internet saat ini</label>
+          <select id="kepuasan">
+            <option value="">Pilih</option>
+            <option>Sangat puas</option>
+            <option>Cukup puas</option>
+            <option>Kurang puas</option>
+            <option>Tidak puas</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label>14. Keluhan utama</label>
+          <select id="keluhan">
+            <option value="">Pilih</option>
+            <option>Lemot</option>
+            <option>Sering putus</option>
+            <option>Tidak stabil malam hari</option>
+            <option>Harga mahal</option>
+            <option>CS lambat</option>
+            <option>Speed tidak sesuai</option>
+            <option>Tidak ada keluhan</option>
+          </select>
+        </div>
+      </div>
+
+      <h3 style="margin-top:18px;">C. Brand Awareness Biznet</h3>
+      <div class="grid">
+        <div class="col-12">
+          <label>15. Provider internet rumah yang diketahui responden (jawaban terbuka)</label>
+          <input type="text" id="known_brands" placeholder="Contoh: IndiHome, Biznet, Iconnet, provider lokal...">
+        </div>
+        <div class="col-4">
+          <label>16. Pernah mendengar Biznet?</label>
+          <select id="heard_biznet">
+            <option value="">Pilih</option>
+            <option>Ya</option>
+            <option>Tidak</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label>17. Biznet menurut responden adalah...</label>
+          <select id="biznet_is">
+            <option value="">Pilih</option>
+            <option>Provider internet rumah</option>
+            <option>Provider TV/internet</option>
+            <option>Brand teknologi</option>
+            <option>Tidak tahu pasti</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label>18. Tahu Biznet tersedia di area ini?</label>
+          <select id="know_available">
+            <option value="">Pilih</option>
+            <option>Ya</option>
+            <option>Tidak</option>
+            <option>Tidak yakin</option>
+          </select>
+        </div>
+        <div class="col-12">
+          <label>19. Dari mana tahu Biznet?</label>
+          <div class="options">
+            <label><input type="checkbox" name="source" value="Tetangga"> Tetangga</label>
+            <label><input type="checkbox" name="source" value="Sales"> Sales</label>
+            <label><input type="checkbox" name="source" value="Media sosial"> Media sosial</label>
+            <label><input type="checkbox" name="source" value="Spanduk"> Spanduk</label>
+            <label><input type="checkbox" name="source" value="Teman/keluarga"> Teman/keluarga</label>
+            <label><input type="checkbox" name="source" value="Iklan"> Iklan</label>
+            <label><input type="checkbox" name="source" value="Lainnya"> Lainnya</label>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:18px;">D. Brand Acceptance</h3>
+      <div class="grid">
+        <div class="col-4">
+          <label>20. Kesan terhadap Biznet</label>
+          <select id="brand_impression">
+            <option value="">Pilih</option>
+            <option>Bagus dan terpercaya</option>
+            <option>Cepat tapi mahal</option>
+            <option>Biasa saja</option>
+            <option>Tidak tahu</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label>21. Penilaian paket 100 Mbps Rp200 ribu/bulan</label>
+          <select id="offer_interest">
+            <option value="">Pilih</option>
+            <option>Sangat menarik</option>
+            <option>Cukup menarik</option>
+            <option>Kurang menarik</option>
+            <option>Tidak menarik</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label>22. Harga Rp200 ribu/bulan menurut responden</label>
+          <select id="price_view">
+            <option value="">Pilih</option>
+            <option>Murah</option>
+            <option>Wajar</option>
+            <option>Agak mahal</option>
+            <option>Mahal</option>
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label>23. Ketertarikan pindah ke Biznet</label>
+          <select id="switch_interest">
+            <option value="">Pilih</option>
+            <option>Sangat tertarik</option>
+            <option>Cukup tertarik</option>
+            <option>Kurang tertarik</option>
+            <option>Tidak tertarik</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label>26. Budget ideal internet rumah per bulan</label>
+          <select id="ideal_budget">
+            <option value="">Pilih</option>
+            <option>&lt; Rp150 ribu</option>
+            <option>Rp150–199 ribu</option>
+            <option>Rp200–249 ribu</option>
+            <option>Rp250–300 ribu</option>
+            <option>&gt; Rp300 ribu</option>
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label>24. Alasan utama tertarik pada Biznet</label>
+          <select id="interest_reason">
+            <option value="">Pilih</option>
+            <option>Speed besar</option>
+            <option>Lebih stabil</option>
+            <option>Brand terpercaya</option>
+            <option>Promo menarik</option>
+            <option>Rekomendasi orang</option>
+            <option>Lainnya</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label>25. Alasan utama ragu/tidak tertarik</label>
+          <select id="barrier_reason">
+            <option value="">Pilih</option>
+            <option>Harga mahal</option>
+            <option>Sudah nyaman dengan provider sekarang</option>
+            <option>Tidak yakin sinyal/jaringan bagus</option>
+            <option>Takut biaya pasang</option>
+            <option>Belum tahu Biznet</option>
+            <option>Tidak butuh speed tinggi</option>
+            <option>Lainnya</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <label>27. Promo yang paling membuat mau pasang</label>
+          <div class="options">
+            <label><input type="checkbox" name="promo" value="Gratis instalasi"> Gratis instalasi</label>
+            <label><input type="checkbox" name="promo" value="Diskon 1–3 bulan"> Diskon 1–3 bulan</label>
+            <label><input type="checkbox" name="promo" value="Cashback"> Cashback</label>
+            <label><input type="checkbox" name="promo" value="Bonus router/perangkat"> Bonus router/perangkat</label>
+            <label><input type="checkbox" name="promo" value="Bisa bayar fleksibel"> Bisa bayar fleksibel</label>
+            <label><input type="checkbox" name="promo" value="Bonus referral tetangga"> Bonus referral tetangga</label>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label>28. Jika tetangga sudah pakai Biznet dan puas, apakah responden lebih tertarik?</label>
+          <div class="options">
+            <label><input type="radio" name="neighbor_effect" value="Ya"> Ya</label>
+            <label><input type="radio" name="neighbor_effect" value="Mungkin"> Mungkin</label>
+            <label><input type="radio" name="neighbor_effect" value="Tidak"> Tidak</label>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:18px;">E. Potensi Closing</h3>
+      <div class="grid">
+        <div class="col-4">
+          <label>29. Kapan paling mungkin pasang?</label>
+          <select id="timeline">
+            <option value="">Pilih</option>
+            <option>Segera</option>
+            <option>1 bulan ke depan</option>
+            <option>3 bulan ke depan</option>
+            <option>Belum ada rencana</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label>30. Boleh dihubungi tim Biznet?</label>
+          <select id="contact_ok">
+            <option value="">Pilih</option>
+            <option>Ya</option>
+            <option>Tidak</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label>31. Nomor kontak</label>
+          <input type="tel" id="phone">
+        </div>
+        <div class="col-12">
+          <label>32. Catatan sales</label>
+          <textarea id="sales_note" placeholder="Contoh: sangat sensitif harga, tertarik kalau gratis instalasi, provider sekarang sering putus, rumah potensial untuk referral tetangga, dll"></textarea>
+        </div>
+      </div>
+
+      <h3 style="margin-top:18px;">F. Observasi Lapangan (Opsional tapi disarankan)</h3>
+      <div class="grid">
+        <div class="col-4">
+          <label>Tipe pemukiman</label>
+          <select id="settlement_type">
+            <option value="">Pilih</option>
+            <option>Perumahan subsidi</option>
+            <option>Perumahan majemuk</option>
+            <option>Gang padat penduduk</option>
+            <option>Campuran</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label>Kepadatan rumah</label>
+          <select id="density">
+            <option value="">Pilih</option>
+            <option>Tinggi</option>
+            <option>Sedang</option>
+            <option>Rendah</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label>Kelas ekonomi visual</label>
+          <select id="econ_visual">
+            <option value="">Pilih</option>
+            <option>Low</option>
+            <option>Middle-low</option>
+            <option>Middle</option>
+          </select>
+        </div>
+        <div class="col-12">
+          <label>Provider terlihat di area / catatan kompetitor</label>
+          <textarea id="competitor_note" placeholder="Contoh: banyak kabel provider lokal, spanduk IndiHome, tetangga banyak pakai provider lokal A, dll"></textarea>
+        </div>
+      </div>
+
+      <div class="btns no-print">
+        <button type="button" onclick="saveRespondent()">Simpan Responden</button>
+        <button type="button" class="btn-secondary" onclick="resetForm()">Reset Form</button>
+        <button type="button" class="btn-warning" onclick="window.print()">Print Form Kosong</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card no-print">
+    <h2>4) Hasil Skoring Responden Saat Ini</h2>
+    <div class="scorebox">
+      <div class="scoreitem">
+        <div>Demand Score</div>
+        <div class="num" id="previewDemand">0</div>
+        <div id="previewDemandLabel" class="small muted">-</div>
+      </div>
+      <div class="scoreitem">
+        <div>Awareness Score</div>
+        <div class="num" id="previewAwareness">0</div>
+        <div id="previewAwarenessLabel" class="small muted">-</div>
+      </div>
+      <div class="scoreitem">
+        <div>Acceptance Score</div>
+        <div class="num" id="previewAcceptance">0</div>
+        <div id="previewAcceptanceLabel" class="small muted">-</div>
+      </div>
+      <div class="scoreitem">
+        <div>Segment</div>
+        <div class="num" id="previewSegment" style="font-size:18px">-</div>
+        <div id="previewSegmentLabel" class="small muted">-</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card no-print">
+    <h2>5) Rekap Ringkas</h2>
+    <div class="scorebox">
+      <div class="scoreitem">
+        <div>Total Responden</div>
+        <div class="num" id="sumTotal">0</div>
+      </div>
+      <div class="scoreitem">
+        <div>% Aware Biznet</div>
+        <div class="num" id="sumAware">0%</div>
+      </div>
+      <div class="scoreitem">
+        <div>% Tertarik Pindah/Pasang</div>
+        <div class="num" id="sumInterested">0%</div>
+      </div>
+      <div class="scoreitem">
+        <div>% Anggap Rp200rb Mahal/Agak Mahal</div>
+        <div class="num" id="sumExpensive">0%</div>
+      </div>
+    </div>
+    <div class="btns">
+      <button type="button" class="btn-success" onclick="exportCSV()">Export CSV</button>
+      <button type="button" class="btn-danger" onclick="clearAllData()">Hapus Semua Data</button>
+    </div>
+  </div>
+
+  <div class="card no-print">
+    <h2>6) Template Rekap Scoring</h2>
+    <p class="muted">Tabel ini bisa dipakai sebagai rekap utama. Data bisa di-export ke CSV.</p>
+    <div style="overflow:auto; max-height:480px;">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Tanggal</th>
+            <th>Inisial</th>
+            <th>Kelurahan</th>
+            <th>RT/RW</th>
+            <th>Income</th>
+            <th>Provider</th>
+            <th>Biaya</th>
+            <th>Kepuasan</th>
+            <th>Heard Biznet</th>
+            <th>Price View 200rb</th>
+            <th>Switch Interest</th>
+            <th>Timeline</th>
+            <th>Demand</th>
+            <th>Awareness</th>
+            <th>Acceptance</th>
+            <th>Segment</th>
+            <th>Phone</th>
+            <th>Catatan</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const STORAGE_KEY = "biznet_survei_jambi_data_v1";
+
+  function getVal(id){
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : "";
+  }
+
+  function getRadio(name){
+    const checked = document.querySelector(`input[name="${name}"]:checked`);
+    return checked ? checked.value : "";
+  }
+
+  function getChecks(name){
+    return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(x=>x.value);
+  }
+
+  function scoreLevel(score){
+    if(score <= 2) return {label:"Rendah", cls:"low"};
+    if(score <= 5) return {label:"Sedang", cls:"mid"};
+    return {label:"Tinggi", cls:"high"};
+  }
+
+  function computeScoresFromForm(){
+    const wifi = getRadio("wifi");
+    const kepuasan = getVal("kepuasan");
+    const penggunaRumah = getVal("pengguna_rumah");
+    const penggunaan = getChecks("penggunaan");
+    const timeline = getVal("timeline");
+    const knownBrands = getVal("known_brands").toLowerCase();
+    const heardBiznet = getVal("heard_biznet");
+    const biznetIs = getVal("biznet_is");
+    const knowAvailable = getVal("know_available");
+    const brandImpression = getVal("brand_impression");
+    const offerInterest = getVal("offer_interest");
+    const priceView = getVal("price_view");
+    const switchInterest = getVal("switch_interest");
+    const contactOk = getVal("contact_ok");
+    const neighborEffect = getRadio("neighbor_effect");
+
+    let demand = 0;
+    if(wifi === "Ya") demand += 2;
+    if(wifi === "Tidak" && (timeline === "Segera" || timeline === "1 bulan ke depan" || timeline === "3 bulan ke depan")) demand += 2;
+    if(kepuasan === "Kurang puas" || kepuasan === "Tidak puas") demand += 2;
+    if(penggunaRumah === "3–4 orang" || penggunaRumah === "5 orang atau lebih") demand += 1;
+
+    const usesNeed = ["Sekolah anak","Kerja/WFH","Streaming YouTube/film","Usaha/CCTV","Gaming"];
+    if(penggunaan.some(x => usesNeed.includes(x))) demand += 1;
+
+    if(timeline === "Segera" || timeline === "1 bulan ke depan" || timeline === "3 bulan ke depan") demand += 2;
+
+    let awareness = 0;
+    if(knownBrands.includes("biznet")) awareness += 3;
+    else if(heardBiznet === "Ya") awareness += 2;
+    if(biznetIs === "Provider internet rumah" || biznetIs === "Provider TV/internet") awareness += 1;
+    if(knowAvailable === "Ya") awareness += 2;
+
+    let acceptance = 0;
+    if(brandImpression === "Bagus dan terpercaya") acceptance += 2;
+    if(priceView === "Murah" || priceView === "Wajar" || offerInterest === "Sangat menarik" || offerInterest === "Cukup menarik") acceptance += 2;
+    if(switchInterest === "Sangat tertarik" || switchInterest === "Cukup tertarik") acceptance += 2;
+    if(contactOk === "Ya") acceptance += 1;
+    if(neighborEffect === "Ya" || neighborEffect === "Mungkin") acceptance += 1;
+
+    const segment = computeSegment({
+      heardBiznet, kepuasan, priceView, switchInterest, timeline,
+      idealBudget:getVal("ideal_budget"), barrierReason:getVal("barrier_reason"),
+      wifi
+    });
+
+    return { demand, awareness, acceptance, segment };
+  }
+
+  function computeSegment(data){
+    const {heardBiznet, kepuasan, priceView, switchInterest, timeline, idealBudget, barrierReason} = data;
+
+    // Segment 1 — High Potential
+    if(
+      heardBiznet === "Ya" &&
+      (kepuasan === "Kurang puas" || kepuasan === "Tidak puas") &&
+      (priceView === "Murah" || priceView === "Wajar") &&
+      (switchInterest === "Sangat tertarik" || switchInterest === "Cukup tertarik") &&
+      (timeline === "Segera" || timeline === "1 bulan ke depan")
+    ){
+      return "High Potential";
+    }
+
+    // Segment 2 — Price Sensitive but Interested
+    if(
+      (switchInterest === "Sangat tertarik" || switchInterest === "Cukup tertarik") &&
+      (priceView === "Agak mahal" || priceView === "Mahal" || idealBudget === "< Rp150 ribu" || idealBudget === "Rp150–199 ribu")
+    ){
+      return "Price Sensitive but Interested";
+    }
+
+    // Segment 3 — Aware but Resistant
+    if(
+      heardBiznet === "Ya" &&
+      (switchInterest === "Kurang tertarik" || switchInterest === "Tidak tertarik" || barrierReason === "Sudah nyaman dengan provider sekarang")
+    ){
+      return "Aware but Resistant";
+    }
+
+    return "Low Demand";
+  }
+
+  function segmentClass(seg){
+    if(seg === "High Potential") return "seg1";
+    if(seg === "Price Sensitive but Interested") return "seg2";
+    if(seg === "Aware but Resistant") return "seg3";
+    return "seg4";
+  }
+
+  function updatePreview(){
+    const s = computeScoresFromForm();
+    const d = scoreLevel(s.demand);
+    const a = scoreLevel(s.awareness);
+    const ac = scoreLevel(s.acceptance);
+
+    document.getElementById("previewDemand").textContent = s.demand;
+    document.getElementById("previewDemandLabel").innerHTML = `<span class="tag ${d.cls}">${d.label}</span>`;
+    document.getElementById("previewAwareness").textContent = s.awareness;
+    document.getElementById("previewAwarenessLabel").innerHTML = `<span class="tag ${a.cls}">${a.label}</span>`;
+    document.getElementById("previewAcceptance").textContent = s.acceptance;
+    document.getElementById("previewAcceptanceLabel").innerHTML = `<span class="tag ${ac.cls}">${ac.label}</span>`;
+    document.getElementById("previewSegment").innerHTML = `<span class="tag ${segmentClass(s.segment)}">${s.segment}</span>`;
+    document.getElementById("previewSegmentLabel").textContent = "Segmentasi otomatis";
+  }
+
+  function saveRespondent(){
+    const data = {
+      tanggal:getVal("tanggal"),
+      inisial:getVal("inisial"),
+      kelurahan:getVal("kelurahan"),
+      rt_rw:getVal("rt_rw"),
+      usia:getVal("usia"),
+      pekerjaan:getVal("pekerjaan"),
+      income:getVal("income"),
+      status_rumah:getVal("status_rumah"),
+      wifi:getRadio("wifi"),
+      provider:getVal("provider"),
+      biaya:getVal("biaya"),
+      pengguna_rumah:getVal("pengguna_rumah"),
+      penggunaan:getChecks("penggunaan").join("; "),
+      kepuasan:getVal("kepuasan"),
+      keluhan:getVal("keluhan"),
+      known_brands:getVal("known_brands"),
+      heard_biznet:getVal("heard_biznet"),
+      biznet_is:getVal("biznet_is"),
+      know_available:getVal("know_available"),
+      source:getChecks("source").join("; "),
+      brand_impression:getVal("brand_impression"),
+      offer_interest:getVal("offer_interest"),
+      price_view:getVal("price_view"),
+      switch_interest:getVal("switch_interest"),
+      interest_reason:getVal("interest_reason"),
+      barrier_reason:getVal("barrier_reason"),
+      ideal_budget:getVal("ideal_budget"),
+      promo:getChecks("promo").join("; "),
+      neighbor_effect:getRadio("neighbor_effect"),
+      timeline:getVal("timeline"),
+      contact_ok:getVal("contact_ok"),
+      phone:getVal("phone"),
+      sales_note:getVal("sales_note"),
+      settlement_type:getVal("settlement_type"),
+      density:getVal("density"),
+      econ_visual:getVal("econ_visual"),
+      competitor_note:getVal("competitor_note")
+    };
+
+    if(!data.kelurahan || !data.inisial){
+      alert("Minimal isi Nama Inisial dan Kelurahan.");
+      return;
+    }
+
+    const scores = computeScoresFromForm();
+    data.demand_score = scores.demand;
+    data.awareness_score = scores.awareness;
+    data.acceptance_score = scores.acceptance;
+    data.segment = scores.segment;
+
+    const arr = loadData();
+    arr.push(data);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+    renderTable();
+    renderSummary();
+    alert("Data responden berhasil disimpan.");
+    resetForm();
+  }
+
+  function loadData(){
+    try{
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function renderTable(){
+    const arr = loadData();
+    const tbody = document.querySelector("#dataTable tbody");
+    tbody.innerHTML = "";
+    arr.forEach((x, i) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${i+1}</td>
+        <td>${x.tanggal || ""}</td>
+        <td>${x.inisial || ""}</td>
+        <td>${x.kelurahan || ""}</td>
+        <td>${x.rt_rw || ""}</td>
+        <td>${x.income || ""}</td>
+        <td>${x.provider || ""}</td>
+        <td>${x.biaya || ""}</td>
+        <td>${x.kepuasan || ""}</td>
+        <td>${x.heard_biznet || ""}</td>
+        <td>${x.price_view || ""}</td>
+        <td>${x.switch_interest || ""}</td>
+        <td>${x.timeline || ""}</td>
+        <td><span class="tag ${scoreLevel(x.demand_score).cls}">${x.demand_score} - ${scoreLevel(x.demand_score).label}</span></td>
+        <td><span class="tag ${scoreLevel(x.awareness_score).cls}">${x.awareness_score} - ${scoreLevel(x.awareness_score).label}</span></td>
+        <td><span class="tag ${scoreLevel(x.acceptance_score).cls}">${x.acceptance_score} - ${scoreLevel(x.acceptance_score).label}</span></td>
+        <td><span class="tag ${segmentClass(x.segment)}">${x.segment}</span></td>
+        <td>${x.phone || ""}</td>
+        <td>${x.sales_note || ""}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderSummary(){
+    const arr = loadData();
+    const total = arr.length;
+    document.getElementById("sumTotal").textContent = total;
+
+    if(total === 0){
+      document.getElementById("sumAware").textContent = "0%";
+      document.getElementById("sumInterested").textContent = "0%";
+      document.getElementById("sumExpensive").textContent = "0%";
+      return;
+    }
+
+    const aware = arr.filter(x => x.heard_biznet === "Ya").length;
+    const interested = arr.filter(x => x.switch_interest === "Sangat tertarik" || x.switch_interest === "Cukup tertarik").length;
+    const expensive = arr.filter(x => x.price_view === "Agak mahal" || x.price_view === "Mahal").length;
+
+    document.getElementById("sumAware").textContent = Math.round((aware/total)*100) + "%";
+    document.getElementById("sumInterested").textContent = Math.round((interested/total)*100) + "%";
+    document.getElementById("sumExpensive").textContent = Math.round((expensive/total)*100) + "%";
+  }
+
+  function exportCSV(){
+    const arr = loadData();
+    if(arr.length === 0){
+      alert("Belum ada data untuk diexport.");
+      return;
+    }
+    const headers = Object.keys(arr[0]);
+    const csvRows = [
+      headers.join(","),
+      ...arr.map(row => headers.map(h => `"${String(row[h] ?? "").replace(/"/g,'""')}"`).join(","))
+    ];
+    const blob = new Blob([csvRows.join("\n")], {type:"text/csv;charset=utf-8;"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "rekap_survei_biznet_jambi.csv";
+    a.click();
+  }
+
+  function resetForm(){
+    document.getElementById("surveyForm").reset();
+    updatePreview();
+  }
+
+  function clearAllData(){
+    if(confirm("Yakin ingin menghapus semua data responden?")){
+      localStorage.removeItem(STORAGE_KEY);
+      renderTable();
+      renderSummary();
+      alert("Semua data berhasil dihapus.");
+    }
+  }
+
+  document.addEventListener("input", updatePreview);
+  document.addEventListener("change", updatePreview);
+
+  renderTable();
+  renderSummary();
+  updatePreview();
+</script>
+</body>
+</html>
